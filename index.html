@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Lynkz URL shortener</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Do+Hyeon" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <nav>
+        <h1>Lynkz</h1>
+    </nav>
+
+    <main>
+
+            <input type = "radio" id = "tab1" name = "tabs" checked>
+            <label for = "tab1">Lynkz</label>
+            <input type = "radio" id = "tab2" name = "tabs">
+            <label for = "tab2">unLynkz</label>
+
+      <form id="new-url" action="https://new.lynkz.me" method="POST">
+        <label for="url">Enter a URL to shorten:</label>
+        <input type="url" id="new-url-input" name="url" placeholder="https://example.com">
+        
+        <button type="submit">Go!</button>
+        
+        <input type="hidden" name="action" value="new">
+      </form>
+      
+      <form id="delete-url" action="https://api.lynkz.me" method="POST">
+        <label for="identifier">Enter a URL identifier to delete:</label>
+        <input type="text" id="new-url-input" name="identifier" placeholder="1hv12c...">
+        
+        <label for="delete_key">Enter the corresponding delete key:</label>
+        <input type="text" id="new-url-input" name="delete_key" placeholder="deletekeyof30characters">
+        
+        <button type="submit" class="danger">Delete!</button>
+        <input type="hidden" name="action" value="delete">
+      </form>
+    </main>
+  </body>
+</html>
