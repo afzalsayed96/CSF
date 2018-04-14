@@ -157,6 +157,7 @@
     width: 0px;
     background: transparent;
     transition: width .5s ease, background-color .5s ease;
+    border-radius: 1.5px;
   }
   main>label:hover:after {
     content: '';
