@@ -1,43 +1,116 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Lynkz URL shortener</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css?family=Do+Hyeon" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-  </head>
-  <body>
-    <nav>
-        <h1>Lynkz</h1>
-    </nav>
 
-    <main>
+<head>
+  <title>Lynkz URL shortener</title>
+  <script src="https://use.typekit.net/kfx1lmb.js"></script>
+  <style>
+    @font-face {
+      font-family: tk-proxima-nova-n3;
+      src: url(https://use.typekit.net/af/475f4b/00000000000000003b9ad1b5/27/l?primer=7ceb210e49ade74e23101e10f006f110a0b6588c7c57777a6e3d98a38b749696&fvd=n3&v=3) format("woff2"), url(https://use.typekit.net/af/475f4b/00000000000000003b9ad1b5/27/d?primer=7ceb210e49ade74e23101e10f006f110a0b6588c7c57777a6e3d98a38b749696&fvd=n3&v=3) format("woff"), url(https://use.typekit.net/af/475f4b/00000000000000003b9ad1b5/27/a?primer=7ceb210e49ade74e23101e10f006f110a0b6588c7c57777a6e3d98a38b749696&fvd=n3&v=3) format("opentype");
+      font-weight: 300;
+      font-style: normal;
+    }
 
-            <input type = "radio" id = "tab1" name = "tabs" checked>
-            <label for = "tab1">Lynkz</label>
-            <input type = "radio" id = "tab2" name = "tabs">
-            <label for = "tab2">unLynkz</label>
+    @font-face {
+      font-family: tk-proxima-nova-soft-n4;
+      src: url(https://use.typekit.net/af/c58682/00000000000000000001743c/27/l?primer=7ceb210e49ade74e23101e10f006f110a0b6588c7c57777a6e3d98a38b749696&fvd=n4&v=3) format("woff2"), url(https://use.typekit.net/af/c58682/00000000000000000001743c/27/d?primer=7ceb210e49ade74e23101e10f006f110a0b6588c7c57777a6e3d98a38b749696&fvd=n4&v=3) format("woff"), url(https://use.typekit.net/af/c58682/00000000000000000001743c/27/a?primer=7ceb210e49ade74e23101e10f006f110a0b6588c7c57777a6e3d98a38b749696&fvd=n4&v=3) format("opentype");
+      font-weight: 400;
+      font-style: normal;
+    }
 
-      <form id="new-url" action="https://new.lynkz.me" method="POST">
-        <label for="url">Enter a URL to shorten:</label>
-        <input type="url" id="new-url-input" name="url" placeholder="https://example.com">
-        
-        <button type="submit">Go!</button>
-        
-        <input type="hidden" name="action" value="new">
-      </form>
-      
-      <form id="delete-url" action="https://api.lynkz.me" method="POST">
-        <label for="identifier">Enter a URL identifier to delete:</label>
-        <input type="text" id="new-url-input" name="identifier" placeholder="1hv12c...">
-        
-        <label for="delete_key">Enter the corresponding delete key:</label>
-        <input type="text" id="new-url-input" name="delete_key" placeholder="deletekeyof30characters">
-        
-        <button type="submit" class="danger">Delete!</button>
-        <input type="hidden" name="action" value="delete">
-      </form>
-    </main>
-    <a style="position:absolute;bottom:0px;right:0px" href="https://github.com/afzalsayed96/lynkz/"><img src="github.svg" height="50px"/></a>
-  </body>
+    @font-face {
+      font-family: tk-proxima-nova-soft-n6;
+      src: url(https://use.typekit.net/af/cc4447/00000000000000000001743e/27/l?primer=7ceb210e49ade74e23101e10f006f110a0b6588c7c57777a6e3d98a38b749696&fvd=n6&v=3) format("woff2"), url(https://use.typekit.net/af/cc4447/00000000000000000001743e/27/d?primer=7ceb210e49ade74e23101e10f006f110a0b6588c7c57777a6e3d98a38b749696&fvd=n6&v=3) format("woff"), url(https://use.typekit.net/af/cc4447/00000000000000000001743e/27/a?primer=7ceb210e49ade74e23101e10f006f110a0b6588c7c57777a6e3d98a38b749696&fvd=n6&v=3) format("opentype");
+      font-weight: 600;
+      font-style: normal;
+    }
+  </style>
+  <script>try { Typekit.load({ async: true }); } catch (e) { }</script>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css?family=Do+Hyeon" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+  <nav>
+    <div id="menuToggle">
+      <!--
+          A fake / hidden checkbox is used as click reciever,
+          so you can use the :checked selector on it.
+          -->
+      <input id="ham" type="checkbox" style="cursor: default"/>
+      <label for="ham" style="
+          height: 30px;
+          width:  33px;
+          display:  inline-block;
+          z-index: 100;
+          position:  absolute;
+          cursor: pointer;
+      "></label>
+      <!--
+          Some spans to act as a hamburger.
+          
+          They are acting like a real hamburger,
+          not that McDonalds stuff.
+          -->
+      <span></span>
+      <span></span>
+      <span></span>
+
+      <div class="menu-wrapper"></div>
+      <ul id="menu">
+        <a href="#">
+          <li>Home</li>
+        </a>
+        <a href="#">
+          <li>About</li>
+        </a>
+        <a href="#">
+          <li>Info</li>
+        </a>
+        <a href="#">
+          <li>Contact</li>
+        </a>
+      </ul>
+    </div>
+    <h1>Lynkz</h1>
+  </nav>
+
+  <main>
+
+    <input type="radio" id="tab1" name="tabs" checked>
+    <label for="tab1">Lynkz</label>
+    <input type="radio" id="tab2" name="tabs">
+    <label for="tab2">unLynkz</label>
+
+    <form id="new-url" action="https://new.lynkz.me" method="POST">
+      <label for="url">Enter a URL to shorten:</label>
+      <input type="url" id="new-url-input" name="url" placeholder="https://example.com">
+
+      <button type="submit">Go!</button>
+
+      <input type="hidden" name="action" value="new">
+    </form>
+
+    <form id="delete-url" action="https://api.lynkz.me" method="POST">
+      <label for="identifier">Enter a URL identifier to delete:</label>
+      <input type="text" id="new-url-input" name="identifier" placeholder="1hv12c...">
+
+      <label for="delete_key">Enter the corresponding delete key:</label>
+      <input type="text" id="new-url-input" name="delete_key" placeholder="deletekeyof30characters">
+
+      <button type="submit" class="danger">Delete!</button>
+      <input type="hidden" name="action" value="delete">
+    </form>
+  </main>
+  <a style="position:fixed;bottom:0px;right:0px" href="https://github.com/afzalsayed96/lynkz/">
+    <img src="github.svg" height="50px" />
+  </a>
+
+  <div class="box">
+    <div class="box-inner"></div>
+  </div>
+</body>
+
 </html>
